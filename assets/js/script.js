@@ -59,11 +59,18 @@ function highScoreHtml(){
 
     var btn2 = document.createElement("button");
     btn2.innerHTML = "Clear High Score";
-    btn2.className = "btn";
+    btn2.className = "btn-clear";
+    btn2.id = "clearHsBtn"
     btn2.style.margin = "20px";
     btn2.style.width = "200px"
-
     div4.appendChild(btn2);
+
+    $("#clearHsBtn").hover(function(){
+        $(this).css("box-shadow","1px 2px 4px 0px rgb(0 0 0 / 40%)");},
+        function(){
+            $(this).css("box-shadow", "none");
+        }
+    );
 }
 
 //end of high score page
@@ -72,10 +79,7 @@ function highScoreHtml(){
 
 //when cicked on Go back button in high score page the main page should load
 
-bodyContent.addEventListener("click", function(){
-
-    goBackBtnClick();
-});
+bodyContent.addEventListener("click", goBackBtnClick);
 
 function goBackBtnClick(){
 
@@ -87,3 +91,48 @@ function goBackBtnClick(){
 }
 
 //end of go back 
+
+//Beginning of Clear high score
+
+//When clicked on clear high score button the scores should get cleared.
+
+bodyContent.addEventListener("click", function(){
+    event.defaultPrevented;
+    if (event.target.matches("#clearHsBtn"))
+    {
+        clearHighScore();
+    }
+});
+
+function clearHighScore(){
+    //clear the high score in localStorage
+    localStorage.clear();
+
+    //clear the high score display on page
+    var deleteScore = document.querySelector(".score-div");
+    deleteScore.remove();  
+
+    var clearScoreBtn = document.querySelector("#clearHsBtn");
+    clearScoreBtn.disabled = true;
+
+    noHighScore();
+    
+
+}
+
+//function that will display a message if there are no score to display
+
+function noHighScore(){
+
+    //create a p tag
+    var displayMsg = document.createElement("p");
+    displayMsg.id = "display-msg";
+    displayMsg.textContent = "No scores to display!";
+
+
+    //display the p tag between the header and the buttons
+    parentNode.insertBefore(displayMsg, ".score-button");
+    bodyContent.appendChild(displayMsg);
+
+
+}
