@@ -13,4 +13,20 @@ function highScoreHtml(){
 
     //clear content
     container.innerHTML="";
+
+    var div1 = document.createElement("div");
+    div1.className = "main-container"
+    document.body.appendChild(div1);
+    console.dir(div1);
+    
+    
+    var div2 = document.createElement("div");
+    div2.className = "row"
+    div1.appendChild(div2);
+    console.dir(div1);
+
+
+    var heading1 = document.createElement("h1");
+    heading1.textContent = "High Scores";
+    div2.appendChild(heading1);
 }
