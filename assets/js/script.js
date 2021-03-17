@@ -40,4 +40,30 @@ function highScoreHtml(){
     textBox.id = "score-text"
     textBox.disabled = true;
     div3.appendChild(textBox);
+
+    //adding button go back
+    var div4 = document.createElement("div");
+    div4.className = "score-button";
+    div1.appendChild(div4);
+
+    
+    var btn1 = document.createElement("button");
+    btn1.innerHTML = "Go Back";
+    btn1.id = "goBackBtn"
+    btn1.className = "btn";
+    btn1.style.margin = "20px";
+    div4.appendChild(btn1);
+    console.dir(btn1);
+
+    //adding button clear hihg score
+
+    var btn2 = document.createElement("button");
+    btn2.innerHTML = "Clear High Score";
+    btn2.className = "btn";
+    btn2.style.margin = "20px";
+    btn2.style.width = "200px"
+
+    div4.appendChild(btn2);
 }
+
+//end of high score page
