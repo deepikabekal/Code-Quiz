@@ -67,3 +67,23 @@ function highScoreHtml(){
 }
 
 //end of high score page
+
+//Beginning of go back
+
+//when cicked on Go back button in high score page the main page should load
+
+bodyContent.addEventListener("click", function(){
+
+    goBackBtnClick();
+});
+
+function goBackBtnClick(){
+
+   if (event.target.matches("#goBackBtn")){
+       window.location.reload();
+       console.log("you clicked a go back button!");
+   }
+
+}
+
+//end of go back 
