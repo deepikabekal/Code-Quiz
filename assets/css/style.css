@@ -67,6 +67,19 @@ nav {
  
  }
 
+ #score-text{
+    background-color: rgb(215, 184, 245);
+    width: 500px;
+    height: 30px;
+    color: black;
+    font-size: 20px;
+}
+
+.score-button{
+    display: flex;
+    
+}
+
 
 
 
