@@ -29,4 +29,15 @@ function highScoreHtml(){
     var heading1 = document.createElement("h1");
     heading1.textContent = "High Scores";
     div2.appendChild(heading1);
+
+    //displaying high scores
+    var div3 = document.createElement("div");
+    var textBox = document.createElement("input");
+    div3.className="score-div";
+    div1.appendChild(div3); 
+    textBox.setAttribute("type", "text");
+    textBox.setAttribute("value", "hello world");
+    textBox.id = "score-text"
+    textBox.disabled = true;
+    div3.appendChild(textBox);
 }
