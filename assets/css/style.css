@@ -14,6 +14,8 @@
 
 }
 
+
+
 h1{
     color: rgb(72, 2, 90);
     font-size: xxx-large;
@@ -54,21 +56,41 @@ h1{
     outline: none;
 }
 
+#top-line{
+    display: flex;
+    justify-content: space-between;
+}
+
+#time-content{
+    display: flex;
+    margin: 20px 0 0 20px;
+   
+}
+
 nav {
     text-align:start;
-
 }
+
 
 .score-link  {
     margin: 20px 0 0 20px;
  }
  
- .score-link a{
+.score-link a,#time-content label{
      text-decoration: none;
      font-weight: lighter;
      font-size : 1.7vw;
-     color:blueviolet;
- 
+     color:blueviolet; 
+ }
+
+ #time-content input{
+     border: none;
+     height: 30px;
+     background-color: white;
+ }
+
+ #time-content input:focus{
+     outline: none;
  }
 
  #score-text{
@@ -79,11 +101,18 @@ nav {
     font-size: 20px;
 }
 
-.score-button{
+.score-buttons{
     display: flex;
     
 }
 
+/* no high score display message style */
+#display-msg{
+    font-size: 25px;
+    text-align: center;
+    font-style: italic;
+    color: red;
+}
 
 
 

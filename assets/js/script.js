@@ -2,11 +2,15 @@ var bodyContent = document.querySelector("body")
 var container = document.querySelector("#container");
 var highScore = document.querySelector("#score");
 
+//disable the timer textbox
+var timerTextBox = document.querySelector("#timer");
+timerTextBox.disabled = true;
+
 //when clicked on the high score link the user should be navigated to the high score page
 highScore.addEventListener("click",function(){
     event.preventDefault();
     highScoreHtml();
-})
+});
 
 //function that loads the HTML for high score page
 function highScoreHtml(){
@@ -43,7 +47,7 @@ function highScoreHtml(){
 
     //adding button go back
     var div4 = document.createElement("div");
-    div4.className = "score-button";
+    div4.className = "score-buttons";
     div1.appendChild(div4);
 
     
@@ -67,6 +71,7 @@ function highScoreHtml(){
 
     $("#clearHsBtn").hover(function(){
         $(this).css("box-shadow","1px 2px 4px 0px rgb(0 0 0 / 40%)");},
+        
         function(){
             $(this).css("box-shadow", "none");
         }
@@ -113,6 +118,7 @@ function clearHighScore(){
     deleteScore.remove();  
 
     var clearScoreBtn = document.querySelector("#clearHsBtn");
+    $("#clearHsBtn").css("box-shadow","none");
     clearScoreBtn.disabled = true;
 
     noHighScore();
@@ -128,11 +134,9 @@ function noHighScore(){
     var displayMsg = document.createElement("p");
     displayMsg.id = "display-msg";
     displayMsg.textContent = "No scores to display!";
-
-
-    //display the p tag between the header and the buttons
-    parentNode.insertBefore(displayMsg, ".score-button");
-    bodyContent.appendChild(displayMsg);
-
+    $(".score-buttons").before(displayMsg);
 
 }
+
+//function ends
+
