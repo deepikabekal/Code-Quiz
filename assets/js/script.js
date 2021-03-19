@@ -14,11 +14,11 @@ var questions = [
 
 var score = 0;
 var correctAnswer = [
-    {q:1, a:"3. alerts"},
-    {q:2, a:"2. curly brackets"},
-    {q:3, a:"4. all of the above"},
-    {q:4, a:"3. quotes"},
-    {q:5, a:"4. console.log"}
+    {q:0, a:"3. alerts"},
+    {q:1, a:"2. curly brackets"},
+    {q:2, a:"4. all of the above"},
+    {q:3, a:"3. quotes"},
+    {q:4, a:"4. console.log"}
 
 ];
 var questionNumber = 0;
@@ -167,6 +167,7 @@ var startQuiz = document.querySelector(".btn");
 
 startQuiz.addEventListener("click", questionsPage);
 
+
 function questionsPage(){
 
     var mainContent = document.querySelector(".main-container");
@@ -179,11 +180,11 @@ function questionsPage(){
     divQA1.className = "qa-content";
     mainContent.appendChild(divQA1);
 
-    for (var i=0;i<questions.length;i++){
+    //for (var i=0;i<questions.length;i++){
 
         var finalAnswer="";
         divQA1.innerHTML="";
-        //debugger;
+        debugger;
         //display the question
         var questionPEl = document.createElement("p");
         questionPEl.textContent = questions[i].q; //0
@@ -199,9 +200,20 @@ function questionsPage(){
 
         answerButtons();
 
-        
+       var checkAnswer =  waitForButtonClick()
 
-    }
+        finalAnswer = checkAnswers(checkAnswer);
+        console.log(finalAnswer);
+        var divAnswer = document.createElement("div");
+        divAnswer.className = "answer-display";
+        mainContent.appendChild(divAnswer);
+
+        var answerPEl = document.createElement("p");
+        answerPEl.textContent = finalAnswer;
+        divAnswer.appendChild(answerPEl);
+
+
+    //}
 
 
 }
@@ -225,7 +237,15 @@ function answerButtons(){
 
      }
 }
-
+//wait for button press
+function waitForButtonClick(){
+    var checkAnswer = "";
+        $(".answer-btns").on("click",".answer-btn",function(){
+            var checkAnswer = $(this).text();
+            console.log(checkAnswer);
+        });
+    return (checkAnswer);
+}
 //function to see if the answer is correct or wrong
 
 function checkAnswers(answerCheck){
