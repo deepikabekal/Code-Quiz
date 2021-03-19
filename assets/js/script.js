@@ -181,11 +181,12 @@ function questionsPage(){
 
     for (var i=0;i<questions.length;i++){
 
+        var finalAnswer="";
         divQA1.innerHTML="";
-
+        //debugger;
         //display the question
         var questionPEl = document.createElement("p");
-        questionPEl.textContent = questions[i].q;
+        questionPEl.textContent = questions[i].q; //0
         divQA1.appendChild(questionPEl);
 
         //display the answer button
@@ -196,10 +197,59 @@ function questionsPage(){
         divQA1.appendChild(divQA2);
         questionNumber = i;
 
+        answerButtons();
+
         
-        var buttonClick = divQA2.addEventListener("click",checkAnswers)
+
     }
 
 
 }
 
+//function for displaying answer buttons
+
+function answerButtons(){
+
+    for (var i=0; i<questions[questionNumber].ans.length;i++){
+            
+        var btn = [];
+        var divQA3 = [];
+        var divQA2 = document.querySelector(".answer-btns")
+        divQA3[i] = document.createElement("div");
+        divQA3[i].className = "answerbtn-div";
+        divQA2.appendChild(divQA3[i]);
+        btn[i] = document.createElement("button");
+        btn[i].textContent = questions[questionNumber].ans[i];
+        btn[i].className = "btn answer-btn";
+        divQA3[i].appendChild(btn[i]);
+
+     }
+}
+
+//function to see if the answer is correct or wrong
+
+function checkAnswers(answerCheck){
+    var i=0;
+    var answer = "";   
+
+    while (i<correctAnswer.length)
+    {
+        if (questionNumber === correctAnswer[i].q){
+            if (answerCheck === correctAnswer[i].a){
+
+                answer = "Correct!";
+                console.log(answer);
+                console.log(correctAnswer[i].a)
+                return (answer);
+
+            }  else {
+                answer = "Wrong!";
+                return(answer);
+            }
+        }
+        i++;
+
+    }
+    
+
+}
