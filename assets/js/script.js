@@ -2,6 +2,27 @@ var bodyContent = document.querySelector("body")
 var container = document.querySelector("#container");
 var highScore = document.querySelector("#score");
 
+//array of objects for question and answer
+var questions = [
+    {q:"Commonly used data types Do Not include:", ans: ["1. Strings", "2. booleans", "3. alerts", "4. numbers"]},
+    {q:"The condition in an if/else statement is enclosed with         . ", ans: ["1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets"]},
+    {q:"Arrays in javascript can be used to store        . ", ans: ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"]},
+    {q:"String values must be enclosed within       when being assigned to variables.", ans: ["1. commas", "2. curly brackets", "3. quotes", "4. parenthesis"]},
+    {q:"A very useful tool used during development and debugging for printing content to the debugger is: ", ans: ["1. Javascript", "2. terminal/bash", "3. for loops", "4. console.log"]}
+
+];
+
+var score = 0;
+var correctAnswer = [
+    {q:1, a:"3. alerts"},
+    {q:2, a:"2. curly brackets"},
+    {q:3, a:"4. all of the above"},
+    {q:4, a:"3. quotes"},
+    {q:5, a:"4. console.log"}
+
+];
+var questionNumber = 0;
+
 //disable the timer textbox
 var timerTextBox = document.querySelector("#timer");
 timerTextBox.disabled = true;
@@ -20,14 +41,14 @@ function highScoreHtml(){
 
     var div1 = document.createElement("div");
     div1.className = "main-container"
-    document.body.appendChild(div1);
-    console.dir(div1);
+    bodyContent.appendChild(div1);
+    //console.dir(div1);
     
     
     var div2 = document.createElement("div");
     div2.className = "row"
     div1.appendChild(div2);
-    console.dir(div1);
+    //console.dir(div1);
 
 
     var heading1 = document.createElement("h1");
@@ -139,4 +160,46 @@ function noHighScore(){
 }
 
 //function ends
+
+//start quiz event listener
+
+var startQuiz = document.querySelector(".btn");
+
+startQuiz.addEventListener("click", questionsPage);
+
+function questionsPage(){
+
+    var mainContent = document.querySelector(".main-container");
+    mainContent.innerHTML = "";
+
+    //mainContent.className = "qa-content";
+
+    //container to display question and answer 
+    var divQA1 = document.createElement("div");
+    divQA1.className = "qa-content";
+    mainContent.appendChild(divQA1);
+
+    for (var i=0;i<questions.length;i++){
+
+        divQA1.innerHTML="";
+
+        //display the question
+        var questionPEl = document.createElement("p");
+        questionPEl.textContent = questions[i].q;
+        divQA1.appendChild(questionPEl);
+
+        //display the answer button
+
+        //display the answer in buttons
+        var divQA2 = document.createElement("div");
+        divQA2.className = "answer-btns";
+        divQA1.appendChild(divQA2);
+        questionNumber = i;
+
+        
+        var buttonClick = divQA2.addEventListener("click",checkAnswers)
+    }
+
+
+}
 
