@@ -163,40 +163,80 @@ function noHighScore(){
 
 //start quiz event listener
 
-var startQuiz = document.querySelector(".btn");
+$(".click-btn").on("click",startQuiz);
+var questionNumber =0;
+var answer = "";
 
-startQuiz.addEventListener("click", questionsPage);
+//start quiz function
 
+function startQuiz(){
+    
+    //console.log(answer);
+    questionsPage(questionNumber);
+    displayAnswer(answer);
+    $("button").click(function(){
+        if (questionNumber<questions.length){
+            var checkAnswer = $(this).text();
+            console.log(checkAnswer);
+            answer = "";
+            var i=0;
+            while (i<correctAnswer.length)
+            {
+                if (questionNumber === correctAnswer[i].q){
+                    if (checkAnswer === correctAnswer[i].a){
+    
+                        answer = "Correct!";
+                        console.log(answer);
+                        //displayAnswer(answer);
+                        break;
+    
+                    }  else {
+                        answer = "Wrong!";
+                        //displayAnswer(answer);
+                        break;
+                    }
+                
+                }
+                i++;
+    
+            }
+            questionNumber++;
+            $()
+            startQuiz();
+        } else {
+            endPage();
+        }
+    });
 
-function questionsPage(){
+}
+
+//function to display the questions
+
+function questionsPage(qNumber){
 
     var mainContent = document.querySelector(".main-container");
     mainContent.innerHTML = "";
 
-    //mainContent.className = "qa-content";
-
+    
     //container to display question and answer 
     var divQA1 = document.createElement("div");
     divQA1.className = "qa-content";
     mainContent.appendChild(divQA1);
 
-    //for (var i=0;i<questions.length;i++){
+    divQA1.innerHTML="";
+    //debugger;
 
-        var finalAnswer="";
-        divQA1.innerHTML="";
-        debugger;
-        //display the question
-        var questionPEl = document.createElement("p");
-        questionPEl.textContent = questions[i].q; //0
-        divQA1.appendChild(questionPEl);
+    //display the question
+    var questionPEl = document.createElement("p");
+    questionPEl.textContent = questions[i].q; //0
+    divQA1.appendChild(questionPEl);
 
-        //display the answer button
 
-        //display the answer in buttons
-        var divQA2 = document.createElement("div");
-        divQA2.className = "answer-btns";
-        divQA1.appendChild(divQA2);
-        questionNumber = i;
+    //display the answer in buttons
+    var divQA2 = document.createElement("div");
+    divQA2.className = "answer-btns";
+    divQA1.appendChild(divQA2);
+    questionNumber = i;
 
         answerButtons();
 
