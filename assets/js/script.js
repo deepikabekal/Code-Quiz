@@ -292,3 +292,12 @@ function checkAnswers(answerCheck){
     
 
 }
+
+function displayAnswer(finalAnswer){
+
+    var divAnswer = document.querySelector(".answer-display");
+
+    var answerPEl = document.createElement("p");
+    answerPEl.textContent = finalAnswer;
+    divAnswer.appendChild(answerPEl);
+}

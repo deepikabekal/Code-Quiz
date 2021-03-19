@@ -9,19 +9,24 @@
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
-    margin-top: 10%;   
+    margin-top: 80px;   
 
 }
 
+.main-container p{
+    word-wrap: break-word;
+}
 
 
 h1{
-    color: rgb(72, 2, 90);
+    color: black;
     font-size: xxx-large;
     margin: 10px;   
+    font-family: 'Times New Roman', Times, serif; 
 }
+
 .content{
-    width: 50%;
+    width: 70%;
     overflow-wrap: break-word;
     text-align: center;
     
@@ -29,28 +34,31 @@ h1{
 
 p {
     font-weight: bold;
-    color: rgb(48, 2, 90);
-    font-size: 28px;
+    color: black;
+    font-size: 26px;
     margin-bottom: 20px;    
 }
 
+/* buttons styles */
 .btn, .btn-clear {
-    width: 100px;
+    width:150px;
     height: 50px;
     border-radius: 15px;
     border: none;
-    background-color: rgb(171, 98, 240);
-    color: black;
-    font-size: 18px;
-    
+    color: white;
+    font-size: 22px;
+    background-image: linear-gradient(180deg, #000046 0%, #5585cc  51%, #000046  100%);
+    box-shadow: 0 0 20px #eee;
+    transition: 0.7s;    
 }
 
 .btn:hover{
-    box-shadow:1px 2px 4px 0px rgb(0 0 0 / 40%);
+    box-shadow:2px 4px 6px 0px rgb(0 0 0 / 60%);
 }
 
 .btn:focus, .btn-clear:focus{
     outline: none;
+    background-image: linear-gradient(to right, #A770EF 0%, #CF8BF3  51%, #A770EF  100%);
 }
 
 #top-line{
@@ -68,18 +76,19 @@ nav {
     text-align:start;
 }
 
-
+/* high score link styles */
 .score-link  {
     margin: 20px 0 0 20px;
  }
  
-.score-link a,#time-content label{
+.score-link a, #time-content label{
      text-decoration: none;
      font-weight: lighter;
      font-size : 1.7vw;
-     color:blueviolet; 
+     color:rgb(187, 16, 209);
  }
 
+ /* timer display styles */
  #time-content input{
      border: none;
      height: 30px;
@@ -116,7 +125,16 @@ nav {
 
 .qa-content{
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;   
+    align-items: center;
+    width:50%;
+    margin-left: 30px;   
+}
+
+.qa-content p{
+    width: 100%;
+    word-wrap: break-word;
+    font-size: 34px;
 }
 
 /* answer button styles */
@@ -128,13 +146,32 @@ nav {
    
 }
 .answer-btn{
-    width: 200px;
+    width: 100%;
     text-align: left;
-    padding-left: 17px;
-    padding-right: 17px;
+    padding-left: 20px;
+    padding-right: 20px;;
 }
 
 .answerbtn-div{
     padding-bottom: 10px;
 }
 
+/* answer button style ends */
+
+/* answes display styles */
+
+.answer-display{
+    border-top: 2px solid lightgray;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    
+}
+
+.answer-display p{
+    color: lightgray;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* end of display answer styles */
