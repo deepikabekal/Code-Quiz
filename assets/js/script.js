@@ -166,6 +166,8 @@ function noHighScore(){
 $(".click-btn").on("click",startQuiz);
 var questionNumber =0;
 var answer = "";
+
+//function to start the quiz and loop until all questions are answered
 function startQuiz(){
     
     //console.log(answer);
@@ -207,6 +209,7 @@ function startQuiz(){
 
 }
 
+//function to create a page with questions and answers
 
 function questionsPage(qNumber){
 
@@ -221,26 +224,24 @@ function questionsPage(qNumber){
     mainContent.appendChild(divQA1);
 
         
-        divQA1.innerHTML="";
-        //debugger;
-        //display the question
-        var questionPEl = document.createElement("p");
-        questionPEl.textContent = questions[qNumber].q; //0
-        divQA1.appendChild(questionPEl);
+    divQA1.innerHTML="";
+    //debugger;
+    //display the question
+    var questionPEl = document.createElement("p");
+    questionPEl.textContent = questions[qNumber].q; //0
+    divQA1.appendChild(questionPEl);
 
-        //display the answer button
+    //div to display the answer in buttons
+    var divQA2 = document.createElement("div");
+    divQA2.className = "answer-btns click-btn";
+    divQA1.appendChild(divQA2);
 
-        //display the answer in buttons
-        var divQA2 = document.createElement("div");
-        divQA2.className = "answer-btns click-btn";
-        divQA1.appendChild(divQA2);
+    //call the function which will add buttons to the page. 
+    answerButtons();
 
-        answerButtons();
-
-        
-        var divQA4 = document.createElement("div");
-        divQA4.className = "answer-display";
-        divQA1.appendChild(divQA4);
+    var divQA4 = document.createElement("div");
+    divQA4.className = "answer-display";
+    divQA1.appendChild(divQA4);
 
 }
 
@@ -293,6 +294,7 @@ function checkAnswers(answerCheck){
 
 }
 
+//function to tell user whether the answer entered is correct or wrong
 function displayAnswer(finalAnswer){
 
     var divAnswer = document.querySelector(".answer-display");
