@@ -228,32 +228,22 @@ function questionsPage(qNumber){
 
     //display the question
     var questionPEl = document.createElement("p");
-    questionPEl.textContent = questions[i].q; //0
+    questionPEl.textContent = questions[qNumber].q; //0
     divQA1.appendChild(questionPEl);
 
 
-    //display the answer in buttons
+    //create div to hold the button
     var divQA2 = document.createElement("div");
-    divQA2.className = "answer-btns";
+    divQA2.className = "answer-btns click-btn";
     divQA1.appendChild(divQA2);
-    questionNumber = i;
+    
+    //function call to add button which display answer
+    answerButtons();
 
-        answerButtons();
-
-       var checkAnswer =  waitForButtonClick()
-
-        finalAnswer = checkAnswers(checkAnswer);
-        console.log(finalAnswer);
-        var divAnswer = document.createElement("div");
-        divAnswer.className = "answer-display";
-        mainContent.appendChild(divAnswer);
-
-        var answerPEl = document.createElement("p");
-        answerPEl.textContent = finalAnswer;
-        divAnswer.appendChild(answerPEl);
-
-
-    //}
+    //create div to display answer
+    var divQA4 = document.createElement("div");
+    divQA4.className = "answer-display";
+    divQA1.appendChild(divQA4);
 
 
 }
@@ -277,15 +267,8 @@ function answerButtons(){
 
      }
 }
-//wait for button press
-function waitForButtonClick(){
-    var checkAnswer = "";
-        $(".answer-btns").on("click",".answer-btn",function(){
-            var checkAnswer = $(this).text();
-            console.log(checkAnswer);
-        });
-    return (checkAnswer);
-}
+
+
 //function to see if the answer is correct or wrong
 
 function checkAnswers(answerCheck){
