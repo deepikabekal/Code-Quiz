@@ -289,4 +289,41 @@ function displayAnswer(finalAnswer){
 
 
 //end page function - displays the final score and lets the user enter initials
+function endPage() {
 
+
+    var mainContent = document.querySelector(".main-container");
+    var clearQuestion = document.querySelector(".qa-content");
+    clearQuestion.innerHTML = "";    
+
+    var endPageDiv = document.createElement("div");
+    endPageDiv.className = "endpage-content";
+    mainContent.appendChild(endPageDiv);
+
+   $(endPageDiv).insertBefore(".answer-display");
+    
+    var headingEndP = document.createElement("h1");
+    headingEndP.textContent = "All Done!"
+    endPageDiv.appendChild(headingEndP);
+
+    var scoreMsg = document.createElement("p");
+    scoreMsg.textContent = "Your final score is "
+    endPageDiv.appendChild(scoreMsg);
+
+    var initialsDiv = document.createElement("div");
+    endPageDiv.appendChild(initialsDiv);
+
+    var initialLabel = document.createElement("label");
+    initialLabel.setAttribute("for", "initials");
+    initialLabel.textContent = "Enter Initials:"
+    initialsDiv.appendChild(initialLabel);
+    var initialsTextBox = document.createElement("input");
+    initialsTextBox.setAttribute("name","initials");
+    initialsDiv.appendChild(initialsTextBox);
+
+    var initialSubmitBtn = document.createElement("button");
+    initialSubmitBtn.className = "btn"
+    initialsDiv.appendChild(initialSubmitBtn);
+
+
+}
