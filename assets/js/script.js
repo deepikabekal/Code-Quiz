@@ -2,12 +2,15 @@ var bodyContent = document.querySelector("body")
 var container = document.querySelector("#container");
 var highScore = document.querySelector("#score");
 
+var userScore = 0;
+var highScoreArray = [];
+
 //array of objects for question and answer
 var questions = [
     {q:"Commonly used data types Do Not include:", ans: ["1. Strings", "2. booleans", "3. alerts", "4. numbers"]},
-    {q:"The condition in an if/else statement is enclosed with         . ", ans: ["1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets"]},
-    {q:"Arrays in javascript can be used to store        . ", ans: ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"]},
-    {q:"String values must be enclosed within       when being assigned to variables.", ans: ["1. commas", "2. curly brackets", "3. quotes", "4. parenthesis"]},
+    {q:"The condition in an if/else statement is enclosed with <span>   </span>. ", ans: ["1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets"]},
+    {q:"Arrays in javascript can be used to store <span>   </span>.", ans: ["1. numbers and strings", "2. other arrays", "3. booleans", "4. all of the above"]},
+    {q:"String values must be enclosed within <span>   </span> when being assigned to variables.", ans: ["1. commas", "2. curly brackets", "3. quotes", "4. parenthesis"]},
     {q:"A very useful tool used during development and debugging for printing content to the debugger is: ", ans: ["1. Javascript", "2. terminal/bash", "3. for loops", "4. console.log"]}
 
 ];
@@ -15,7 +18,7 @@ var questions = [
 var score = 0;
 var correctAnswer = [
     {q:0, a:"3. alerts"},
-    {q:1, a:"2. curly brackets"},
+    {q:1, a:"3. parenthesis"},
     {q:2, a:"4. all of the above"},
     {q:3, a:"3. quotes"},
     {q:4, a:"4. console.log"}
@@ -61,7 +64,7 @@ function highScoreHtml(){
     div3.className="score-div";
     div1.appendChild(div3); 
     textBox.setAttribute("type", "text");
-    textBox.setAttribute("value", "hello world");
+    textBox.setAttribute("value", userScore);
     textBox.id = "score-text"
     textBox.disabled = true;
     div3.appendChild(textBox);
@@ -210,7 +213,7 @@ function questionsPage(qNumber){
     //debugger;
     //display the question
     var questionPEl = document.createElement("p");
-    questionPEl.textContent = questions[qNumber].q; //0
+    questionPEl.innerHTML = questions[qNumber].q; //0
     divQA1.appendChild(questionPEl);
 
     //div to display the answer in buttons
@@ -261,12 +264,14 @@ function checkAnswers(answerCheck){
 
                 answer = "Correct!";
                 console.log(answer);
-                console.log(correctAnswer[i].a)
+                console.log(correctAnswer[i].a);
+                userScore = userScore + 5;
                 //return (answer);
 
             }  else {
                 console.log(answer);
                 answer = "Wrong!";
+                userScore = userScore-2;
                // return(answer);
             }
         }
@@ -291,6 +296,11 @@ function displayAnswer(finalAnswer){
 //end page function - displays the final score and lets the user enter initials
 function endPage() {
 
+    // if (userScore<0){
+    //     userScore=0;
+    // }
+
+    var scoreText = "Your final score is " + userScore;
 
     var mainContent = document.querySelector(".main-container");
     var clearQuestion = document.querySelector(".qa-content");
@@ -307,7 +317,7 @@ function endPage() {
     endPageDiv.appendChild(headingEndP);
 
     var scoreMsg = document.createElement("p");
-    scoreMsg.textContent = "Your final score is "
+    scoreMsg.textContent = scoreText;
     endPageDiv.appendChild(scoreMsg);
 
     var initialsDiv = document.createElement("div");
@@ -320,12 +330,30 @@ function endPage() {
     initialsDiv.appendChild(initialLabel);
     var initialsTextBox = document.createElement("input");
     initialsTextBox.setAttribute("name","initials");
+    initialsTextBox.id = "initial-text";
     initialsDiv.appendChild(initialsTextBox);
 
     var initialSubmitBtn = document.createElement("button");
     initialSubmitBtn.className = "btn submit-initials";
     initialSubmitBtn.textContent = "Submit";
     initialsDiv.appendChild(initialSubmitBtn);
+
+    //event listener for initials and score submit button
+    
+    initialSubmitBtn.addEventListener("click", saveScore);
+
+}
+
+
+//function for score submission
+
+function scoreSubmission(){
+    
+    container.innerHTML="";
+    highScoreHtml();
+
+    //get the score and initial and save it on local Storage
+
 
 
 }
