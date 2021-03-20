@@ -311,6 +311,7 @@ function endPage() {
     endPageDiv.appendChild(scoreMsg);
 
     var initialsDiv = document.createElement("div");
+    initialsDiv.className = "initials-entry"
     endPageDiv.appendChild(initialsDiv);
 
     var initialLabel = document.createElement("label");
@@ -322,7 +323,8 @@ function endPage() {
     initialsDiv.appendChild(initialsTextBox);
 
     var initialSubmitBtn = document.createElement("button");
-    initialSubmitBtn.className = "btn"
+    initialSubmitBtn.className = "btn submit-initials";
+    initialSubmitBtn.textContent = "Submit";
     initialsDiv.appendChild(initialSubmitBtn);
 
 
