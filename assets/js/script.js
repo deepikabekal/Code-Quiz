@@ -169,42 +169,24 @@ var answer = "";
 
 //function to start the quiz and loop until all questions are answered
 function startQuiz(){
-    
+        
     //console.log(answer);
     questionsPage(questionNumber);
     displayAnswer(answer);
     $("button").click(function(){
+        var checkAns = $(this).text();
+        //console.log(checkAns);
+        checkAnswers(checkAns);
+        //displayAnswer(answer);
+        questionNumber++;
+        console.log("question number = " + questionNumber);
         if (questionNumber<questions.length){
-            var checkAnswer = $(this).text();
-            console.log(checkAnswer);
-            answer = "";
-            var i=0;
-            while (i<correctAnswer.length)
-            {
-                if (questionNumber === correctAnswer[i].q){
-                    if (checkAnswer === correctAnswer[i].a){
-    
-                        answer = "Correct!";
-                        console.log(answer);
-                        //displayAnswer(answer);
-                        break;
-    
-                    }  else {
-                        answer = "Wrong!";
-                        //displayAnswer(answer);
-                        break;
-                    }
-                
-                }
-                i++;
-    
-            }
-            questionNumber++;
-            $()
             startQuiz();
         } else {
+            //displayAnswer(answer);
             endPage();
         }
+       
     });
 
 }
@@ -241,7 +223,7 @@ function questionsPage(qNumber){
 
     var divQA4 = document.createElement("div");
     divQA4.className = "answer-display";
-    divQA1.appendChild(divQA4);
+    mainContent.appendChild(divQA4);
 
 }
 
@@ -270,7 +252,7 @@ function answerButtons(){
 
 function checkAnswers(answerCheck){
     var i=0;
-    var answer = "";   
+    //var answer = "";   
 
     while (i<correctAnswer.length)
     {
@@ -280,11 +262,12 @@ function checkAnswers(answerCheck){
                 answer = "Correct!";
                 console.log(answer);
                 console.log(correctAnswer[i].a)
-                return (answer);
+                //return (answer);
 
             }  else {
+                console.log(answer);
                 answer = "Wrong!";
-                return(answer);
+               // return(answer);
             }
         }
         i++;
@@ -303,3 +286,7 @@ function displayAnswer(finalAnswer){
     answerPEl.textContent = finalAnswer;
     divAnswer.appendChild(answerPEl);
 }
+
+
+//end page function - displays the final score and lets the user enter initials
+

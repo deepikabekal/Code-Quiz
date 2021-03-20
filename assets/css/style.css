@@ -162,7 +162,7 @@ nav {
 
 .answer-display{
     border-top: 2px solid lightgray;
-    width: 100%;
+    width: 50%;
     margin-top: 10px;
     margin-bottom: 20px;
     
@@ -172,6 +172,7 @@ nav {
     color: lightgray;
     font-style: italic;
     margin-top: 10px;
+    padding-left:20px ;
 }
 
 /* end of display answer styles */
