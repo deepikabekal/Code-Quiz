@@ -7,6 +7,7 @@ var userScore= [];
 var timer = $("#timer").text().trim();
 var seconds = parseInt(timer);
 var countdown = 0;
+var answer = "";
 
 
 //array of objects for question and answer
@@ -178,8 +179,7 @@ $(".click-btn").on("click",function(){
     timerBegin();
     startQuiz();
 });
-var questionNumber =0;
-var answer = "";
+
 
 //function to start the quiz and loop until all questions are answered
 function startQuiz(){
@@ -187,6 +187,7 @@ function startQuiz(){
     //console.log(answer);
     questionsPage(questionNumber);
     displayAnswer(answer);
+
     $("button").click(function(){
         var checkAns = $(this).text();
         //console.log(checkAns);
@@ -199,6 +200,8 @@ function startQuiz(){
         } else {
             //displayAnswer(answer);
             //clearInterval(countdown);
+            $(".answer-display").innerHTML = "";
+            displayAnswer(answer);
             endPage();
             
         }
@@ -300,7 +303,7 @@ function checkAnswers(answerCheck){
 function displayAnswer(finalAnswer){
 
     var divAnswer = document.querySelector(".answer-display");
-
+    divAnswer.innerHTML = "";
     var answerPEl = document.createElement("p");
     answerPEl.textContent = finalAnswer;
     divAnswer.appendChild(answerPEl);
