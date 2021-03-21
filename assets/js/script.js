@@ -40,7 +40,7 @@ highScore.addEventListener("click",function(){
     highScoreHtml();
     var checkScore = JSON.parse(localStorage.getItem("highscore"));
     if (checkScore===null){
-        clearHighScore();
+        noHighScore();
     }else{
         displayHighScore();
     }
@@ -122,7 +122,7 @@ function goBackBtnClick(){
 
    if (event.target.matches("#goBackBtn")){
        window.location.reload();
-       console.log("you clicked a go back button!");
+      // console.log("you clicked a go back button!");
    }
 
 }
@@ -359,12 +359,14 @@ function endPage() {
     
     initialSubmitBtn.addEventListener("click", function(){
         event.preventDefault();
-        if ($("#initial-text").text === ""){
+        //var textIn = 
+        if ($("#initial-text").val() === ""){
             alert("Invalid entry. Please try again");
         } else {
             alert("Your score is saved!");
+            saveScore();
         }
-        saveScore();
+        
         
     });
 
@@ -374,18 +376,18 @@ function saveScore(){
     
     //get the saved score from the localStorage
     userScore = JSON.parse(localStorage.getItem('highscore')) || [];
-    console.log(userScore);
+    //console.log(userScore);
     //save the initals in a variable
     var userInitials = $("#initial-text").val();
-    console.log(userInitials);
+    //console.log(userInitials);
 
     //object to save the user initials and score
     var userObject = {initials:userInitials,playerScore:score};
-    console.log(userObject);
+    //console.log(userObject);
 
     //save the user score object in the array.
     userScore.push(userObject);
-    console.log("userscore",userScore, {userObject});
+    //console.log("userscore",userScore, {userObject});
     
     //save the object in local storage.
     localStorage.setItem("highscore", JSON.stringify(userScore));     
@@ -397,29 +399,7 @@ function saveScore(){
 
 
 
-//function for sorting high score
-// function sortingScore(){
-
-//     var list = JSON.parse(localStorage.getItem('highscore')) || [];
-//     var sortList = [];
-//     for (var i=0;i<list.length;i++){
-//         sortList.push(list[i].playerScore);
-//     }
-//     console.log("list ", list);
-//     //if the no high score ie if the list is empty then go to function noHighScore and display the message
-//     //else sort the high score list from high to low
-//     if (sortList === []){
-//          noHighScore();
-//     } else {
-
-//         sortList.sort(function(x,y){
-//             return(x-y);
-//         });
-        
-//         return(sortList);
-//     }
-    
-// }
+//display all the scores from the localStorage
 
 function displayHighScore(){
 
