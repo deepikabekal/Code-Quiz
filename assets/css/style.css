@@ -66,11 +66,26 @@ p {
     justify-content: space-between;
 }
 
+/* timer display styles */
 #time-content{
     display: flex;
     margin: 20px 0 0 20px;
    
 }
+
+#timer{
+    border: none;
+    height: 30px;
+    width: 50px;
+    background-color: white;
+    color: black;
+    text-align: center;
+}
+
+#time-content input:focus{
+    outline: none;
+}
+
 
 nav {
     text-align:start;
@@ -88,16 +103,7 @@ nav {
      color:rgb(187, 16, 209);
  }
 
- /* timer display styles */
- #time-content input{
-     border: none;
-     height: 30px;
-     background-color: white;
- }
-
- #time-content input:focus{
-     outline: none;
- }
+ 
 
  #score-text{
     background-color: rgb(215, 184, 245);

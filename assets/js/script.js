@@ -1,10 +1,13 @@
 var bodyContent = document.querySelector("body")
 var container = document.querySelector("#container");
 var highScore = document.querySelector("#score");
-
+var questionNumber = 0;
 var score = 0;
-var  userScore= [];
-var timer = 0;
+var userScore= [];
+var timer = $("#timer").text().trim();
+var seconds = parseInt(timer);
+var countdown = 0;
+
 
 //array of objects for question and answer
 var questions = [
@@ -16,7 +19,6 @@ var questions = [
 
 ];
 
-var score = 0;
 var correctAnswer = [
     {q:0, a:"3. alerts"},
     {q:1, a:"3. parenthesis"},
@@ -25,20 +27,20 @@ var correctAnswer = [
     {q:4, a:"4. console.log"}
 
 ];
-var questionNumber = 0;
+
 
 //disable the timer textbox
 var timerTextBox = document.querySelector("#timer");
-timerTextBox.textContent = 60;
 timerTextBox.disabled = true;
 
 //when clicked on the high score link the user should be navigated to the high score page
 highScore.addEventListener("click",function(){
     event.preventDefault();
     highScoreHtml();
-    if (JSON.parse(localStorage.getItem('highscore'))===[]){
+    var checkScore = JSON.parse(localStorage.getItem("highscore"));
+    if (checkScore===null){
         clearHighScore();
-    } else {
+    }else{
         displayHighScore();
     }
     
@@ -173,6 +175,7 @@ function noHighScore(){
 
 $(".click-btn").on("click",function(){
     score = 0;
+    timerBegin();
     startQuiz();
 });
 var questionNumber =0;
@@ -195,7 +198,9 @@ function startQuiz(){
             startQuiz();
         } else {
             //displayAnswer(answer);
+            //clearInterval(countdown);
             endPage();
+            
         }
        
     });
@@ -280,6 +285,7 @@ function checkAnswers(answerCheck){
                 console.log(answer);
                 answer = "Wrong!";
                 score = score-2;
+                seconds=seconds-5;
                // return(answer);
             }
         }
@@ -307,7 +313,7 @@ function endPage() {
     // if (userScore<0){
     //     userScore=0;
     // }
-
+    clearInterval(countdown);
     var scoreText = "Your final score is " + score;
 
     var mainContent = document.querySelector(".main-container");
@@ -350,7 +356,7 @@ function endPage() {
     
     initialSubmitBtn.addEventListener("click", function(){
         event.preventDefault();
-        if ($(".initial-text").text === ""){
+        if ($("#initial-text").text === ""){
             alert("Invalid entry. Please try again");
         } else {
             alert("Your score is saved!");
@@ -364,16 +370,20 @@ function endPage() {
 function saveScore(){
     
     //get the saved score from the localStorage
-    userScore = JSON.parse(localStorage.getItem('highscore'));
+    userScore = JSON.parse(localStorage.getItem('highscore')) || [];
+    console.log(userScore);
     //save the initals in a variable
-    //var initialsValue = document.querySelector(".initial-text");
     var userInitials = $("#initial-text").val();
+    console.log(userInitials);
+
     //object to save the user initials and score
     var userObject = {initials:userInitials,playerScore:score};
-    
+    console.log(userObject);
+
     //save the user score object in the array.
     userScore.push(userObject);
     console.log("userscore",userScore, {userObject});
+    
     //save the object in local storage.
     localStorage.setItem("highscore", JSON.stringify(userScore));     
     container.innerHTML="";
@@ -427,5 +437,24 @@ function displayHighScore(){
 
     }
 
+
+}
+//end of display high score function
+
+//timer begins 
+function timerBegin(){
+
+    //console.log(getTime);
+    
+        countdown = setInterval(function() {
+        //console.log(seconds);
+        seconds--;
+
+        $("#timer").text(seconds);
+        if (seconds <= 0) {
+           
+            endPage();
+        }
+    }, 1000);
 
 }
