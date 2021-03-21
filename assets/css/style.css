@@ -212,3 +212,12 @@ nav {
     margin: 10px;
 }
 
+/* high score display style */
+.score-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.score-div input{
+    margin: 5px;
+}

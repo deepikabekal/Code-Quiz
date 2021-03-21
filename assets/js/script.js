@@ -4,6 +4,7 @@ var highScore = document.querySelector("#score");
 
 var score = 0;
 var  userScore= [];
+var timer = 0;
 
 //array of objects for question and answer
 var questions = [
@@ -28,12 +29,19 @@ var questionNumber = 0;
 
 //disable the timer textbox
 var timerTextBox = document.querySelector("#timer");
+timerTextBox.textContent = 60;
 timerTextBox.disabled = true;
 
 //when clicked on the high score link the user should be navigated to the high score page
 highScore.addEventListener("click",function(){
     event.preventDefault();
     highScoreHtml();
+    if (JSON.parse(localStorage.getItem('highscore'))===[]){
+        clearHighScore();
+    } else {
+        displayHighScore();
+    }
+    
 });
 
 //function that loads the HTML for high score page
@@ -60,15 +68,9 @@ function highScoreHtml(){
 
     //displaying high scores
     var div3 = document.createElement("div");
-    var textBox = document.createElement("input");
     div3.className="score-div";
     div1.appendChild(div3); 
-    textBox.setAttribute("type", "text");
-    textBox.setAttribute("value", score);
-    textBox.id = "score-text"
-    textBox.disabled = true;
-    div3.appendChild(textBox);
-
+    
     //adding button go back
     var div4 = document.createElement("div");
     div4.className = "score-buttons";
@@ -81,9 +83,9 @@ function highScoreHtml(){
     btn1.className = "btn";
     btn1.style.margin = "20px";
     div4.appendChild(btn1);
-    console.dir(btn1);
+    //console.dir(btn1);
 
-    //adding button clear hihg score
+    //adding button clear high score
 
     var btn2 = document.createElement("button");
     btn2.innerHTML = "Clear High Score";
@@ -346,7 +348,7 @@ function endPage() {
 
     //event listener for initials and score submit button
     
-    initialSubmitBtn.addEventListener("click", function(event){
+    initialSubmitBtn.addEventListener("click", function(){
         event.preventDefault();
         if ($(".initial-text").text === ""){
             alert("Invalid entry. Please try again");
@@ -354,55 +356,76 @@ function endPage() {
             alert("Your score is saved!");
         }
         saveScore();
+        
     });
 
 }
 
 function saveScore(){
-
+    
+    //get the saved score from the localStorage
+    userScore = JSON.parse(localStorage.getItem('highscore'));
     //save the initals in a variable
-    var initialsValue = document.querySelector(".initial-text");
-    var userInitials = initialsValue.textContent;
+    //var initialsValue = document.querySelector(".initial-text");
+    var userInitials = $("#initial-text").val();
     //object to save the user initials and score
-    var userObject = {initials:userInitials,playerScore:uScore};
-
+    var userObject = {initials:userInitials,playerScore:score};
+    
     //save the user score object in the array.
     userScore.push(userObject);
-
+    console.log("userscore",userScore, {userObject});
     //save the object in local storage.
-    localStorage.setItem("highscore", JSON.stringify(userObject));     
-
-
-}
-
-//function for score submission
-
-function scoreSubmission(){
-    
+    localStorage.setItem("highscore", JSON.stringify(userScore));     
     container.innerHTML="";
     highScoreHtml();
-
-    //get the score and initial and save it on local Storage
+    displayHighScore();
 
 }
 
+
+
 //function for sorting high score
-function sortingScore(){
+// function sortingScore(){
 
-    var list = JSON.parse(localStorage.getItem('highscore')) || [];
+//     var list = JSON.parse(localStorage.getItem('highscore')) || [];
+//     var sortList = [];
+//     for (var i=0;i<list.length;i++){
+//         sortList.push(list[i].playerScore);
+//     }
+//     console.log("list ", list);
+//     //if the no high score ie if the list is empty then go to function noHighScore and display the message
+//     //else sort the high score list from high to low
+//     if (sortList === []){
+//          noHighScore();
+//     } else {
+
+//         sortList.sort(function(x,y){
+//             return(x-y);
+//         });
+        
+//         return(sortList);
+//     }
     
-    //if the no high score ie if the list is empty then go to function noHighScore and display the message
-    //else sort the high score list from high to low
-    if (list === []){
-         noHighScore();
-    } else {
+// }
 
-        list.sort(function(x,y){
-            return(x-y);
-        });
-        console.log(list);
-        return(list);
+function displayHighScore(){
+
+    //var highScoreList = JSON.parse(localStorage.getItem('highscore'));
+    //var scoreList = sortingScore();
+    //console.log(scoreList);
+    var scoreList = JSON.parse(localStorage.getItem('highscore'));
+    var div1 = document.querySelector(".score-div");
+    for (var i=0;i<scoreList.length;i++){
+
+        var scoreVal = i+1 + ". " + scoreList[i].initials + ": " + scoreList[i].playerScore; 
+        var textBox = document.createElement("input");    
+        textBox.setAttribute("type", "text");
+        textBox.setAttribute("value", scoreVal);
+        textBox.id = "score-text";
+        textBox.disabled = true;
+        div1.appendChild(textBox);
+
     }
 
-    
+
 }
