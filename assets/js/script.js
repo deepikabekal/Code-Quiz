@@ -2,8 +2,8 @@ var bodyContent = document.querySelector("body")
 var container = document.querySelector("#container");
 var highScore = document.querySelector("#score");
 
-var userScore = 0;
-var highScoreArray = [];
+var score = 0;
+var  userScore= [];
 
 //array of objects for question and answer
 var questions = [
@@ -64,7 +64,7 @@ function highScoreHtml(){
     div3.className="score-div";
     div1.appendChild(div3); 
     textBox.setAttribute("type", "text");
-    textBox.setAttribute("value", userScore);
+    textBox.setAttribute("value", score);
     textBox.id = "score-text"
     textBox.disabled = true;
     div3.appendChild(textBox);
@@ -166,7 +166,10 @@ function noHighScore(){
 
 //start quiz event listener
 
-$(".click-btn").on("click",startQuiz);
+$(".click-btn").on("click",function(){
+    score = 0;
+    startQuiz();
+});
 var questionNumber =0;
 var answer = "";
 
@@ -265,13 +268,13 @@ function checkAnswers(answerCheck){
                 answer = "Correct!";
                 console.log(answer);
                 console.log(correctAnswer[i].a);
-                userScore = userScore + 5;
+                score = score + 5;
                 //return (answer);
 
             }  else {
                 console.log(answer);
                 answer = "Wrong!";
-                userScore = userScore-2;
+                score = score-2;
                // return(answer);
             }
         }
@@ -300,7 +303,7 @@ function endPage() {
     //     userScore=0;
     // }
 
-    var scoreText = "Your final score is " + userScore;
+    var scoreText = "Your final score is " + score;
 
     var mainContent = document.querySelector(".main-container");
     var clearQuestion = document.querySelector(".qa-content");
@@ -340,10 +343,33 @@ function endPage() {
 
     //event listener for initials and score submit button
     
-    initialSubmitBtn.addEventListener("click", saveScore);
+    initialSubmitBtn.addEventListener("click", function(event){
+        event.preventDefault();
+        if ($(".initial-text").text === ""){
+            alert("Invalid entry. Please try again");
+        } else {
+            alert("Your score is saved!");
+        }
+        saveScore();
+    });
 
 }
 
+function saveScore(){
+
+    //save the initals in a variable
+    var initialsValue = document.querySelector(".initial-text");
+    var userInitials = initialsValue.textContent;
+    //object to save the user initials and score
+    var userObject = {initials:userInitials,playerScore:uScore};
+
+    //save the user score object in the array.
+    userScore.push(userObject);
+
+    //save the object in local storage.
+    localStorage.setItem("highscore", JSON.stringify(userObject));     
+
+}
 
 //function for score submission
 
@@ -353,7 +379,5 @@ function scoreSubmission(){
     highScoreHtml();
 
     //get the score and initial and save it on local Storage
-
-
 
 }
