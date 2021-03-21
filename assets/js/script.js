@@ -104,6 +104,9 @@ function highScoreHtml(){
 
 //end of high score page
 
+
+
+
 //Beginning of go back
 
 //when cicked on Go back button in high score page the main page should load
@@ -369,6 +372,7 @@ function saveScore(){
     //save the object in local storage.
     localStorage.setItem("highscore", JSON.stringify(userObject));     
 
+
 }
 
 //function for score submission
@@ -380,4 +384,25 @@ function scoreSubmission(){
 
     //get the score and initial and save it on local Storage
 
+}
+
+//function for sorting high score
+function sortingScore(){
+
+    var list = JSON.parse(localStorage.getItem('highscore')) || [];
+    
+    //if the no high score ie if the list is empty then go to function noHighScore and display the message
+    //else sort the high score list from high to low
+    if (list === []){
+         noHighScore();
+    } else {
+
+        list.sort(function(x,y){
+            return(x-y);
+        });
+        console.log(list);
+        return(list);
+    }
+
+    
 }
